@@ -1,0 +1,28 @@
+module KaModUsers
+  class UsersController < KaModUsers::ApplicationController
+    before_filter :authenticate, :only => [:update]
+
+    # returns only the current user!
+    def index
+      @users = User.resource.get
+      render json: @users, :callback => params[:callback]
+    end
+    
+    # can update only his own user
+    def update
+      User.resource[params[:id]].patch(params)
+      head :no_content
+    end
+
+    def get_login_url
+      if params[:callback].nil?
+        head :bad_request 
+      else
+        fb_client = Facebook::Client.new
+        url = fb_client.authorize_url(:callback => params[:callback])
+
+        render json: {:url => url}
+      end
+    end
+  end
+end
