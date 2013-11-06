@@ -21,14 +21,16 @@ module KaModUsers
 
 			def me
 				nil unless !@token.nil?
-				RestClient.proxy = "http://buc-net-proxy.ubisoft.org:3128"
+
 				begin
+					RestClient.proxy = "http://buc-net-proxy.ubisoft.org:3128"
 					response = RestClient.get "https://graph.facebook.com/me", :params => {:access_token => @token}
 					RestClient.proxy = ""
 					return ActiveSupport::JSON.decode(response)
 				rescue => e
+					abort(e.inspect)
 					return nil
-				end				
+				end
 			end
 		end
 	end

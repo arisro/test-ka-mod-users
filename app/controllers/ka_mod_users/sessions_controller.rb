@@ -3,7 +3,7 @@ require 'securerandom'
 module KaModUsers
   class SessionsController < KaModUsers::ApplicationController
     before_filter :authenticate, :only => ["delete"]
-    
+
     def create
       if params[:access_token].nil? || params[:website_id].nil?
         head :bad_request
@@ -17,16 +17,14 @@ module KaModUsers
           # this can also be done in one shot with a single request to the users extension!
           user = RestClient.get User.resource.to_s, {:params => {'filter[email]' => fb_user['email']}}
           # RestClient should do this by itself! Response headers are correct, strange that it is not decoding it!
-          user = ActiveSupport::JSON.decode(user).first
+          user = ActiveSupport::JSON.decode(user)
 
           if user.nil?
             user = User.resource.post({:email => fb_user['email'], :website_id => params[:website_id]})
           end
 
-          # generate internal session token
-          internal_token = SecureRandom.hex(16)
-
-          token = User.resource["#{user['id']}/tokens"].post({:token => {:external_token => params[:access_token], :website_id => params[:website_id], :token => internal_token}})
+          token = User.resource["#{user['id']}/tokens"].post({:token => {:external_token => params[:access_token], :website_id => params[:website_id]}})
+          token = ActiveSupport::JSON.decode(token)
 
           render json: {:token => token, :user => user}
         else
@@ -34,8 +32,8 @@ module KaModUsers
         end
       end
     end
-    
-    def delete
+
+    def destroy
     	Token.resource[params[:id]].delete
       head :no_content
     end

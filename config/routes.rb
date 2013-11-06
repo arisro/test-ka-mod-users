@@ -1,6 +1,6 @@
 KaModUsers::Engine.routes.draw do
 	resources :users, :only => [:index, :update]
-	resources :sessions, :only => [:create, :delete]
+	resources :sessions, :only => [:create, :destroy]
 
 	get "login_url" => 'users#get_login_url'
 	get "login" => 'sessions#create'
