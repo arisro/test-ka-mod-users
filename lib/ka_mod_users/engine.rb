@@ -24,6 +24,7 @@ module KaModUsers
 
     def self.load_config
         config_file_path = "#{KaApi.root}/config/ka_mod_users.yml"
+        logger.debug(KaApi.root.inspect)
         if File.exists?(config_file_path)
             @@config = YAML::load_file(config_file_path)
         end
@@ -31,25 +32,34 @@ module KaModUsers
 
     def self.config
         self.load_config if @@config.nil?
-        @@config
+        return @@config
     end
 
     def self.facebook_config
         self.load_config if @@config.nil?
-    	  @@config['facebook'] if !@@config.nil?
-        nil if @@config.nil?
+        if !@@config.nil?
+          return @@config['facebook'] 
+        else
+          return nil
+        end
     end
 
     def self.http_proxy
         self.load_config if @@config.nil?
-        @@config['http_proxy'] if !@@config.nil?
-        nil if @@config.nil?
+        if !@@config.nil?
+          return @@config['http_proxy'] 
+        else
+          return nil
+        end
     end
 
     def self.user_extension_api_endpoint
         self.load_config if @@config.nil?
-        @@config['user_extension_api_endpoint'] if !@@config.nil?
-        nil if @@config.nil?
+        if !@@config.nil?
+          return @@config['user_extension_api_endpoint'] 
+        else
+          return nil
+        end
     end
   end
 end
