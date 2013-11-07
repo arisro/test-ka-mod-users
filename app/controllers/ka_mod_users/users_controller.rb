@@ -4,7 +4,7 @@ module KaModUsers
 
     # returns only the current user!
     def index
-      @users = User.resource['32'].get
+      @users = User.resource[@current_user[:id]].get
       render json: @users
     end
 

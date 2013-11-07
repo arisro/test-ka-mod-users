@@ -20,7 +20,8 @@ module KaModUsers
           user = ActiveSupport::JSON.decode(user)
 
           if user.nil?
-            user = User.resource.post({:email => fb_user['email'], :website_id => params[:website_id]})
+            user = User.resource.post({:user => {:email => fb_user['email'], :website_id => params[:website_id]}})
+            user = ActiveSupport::JSON.decode(user)
           end
 
           token = User.resource["#{user['id']}/tokens"].post({:token => {:external_token => params[:access_token], :website_id => params[:website_id]}})

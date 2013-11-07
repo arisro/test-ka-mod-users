@@ -12,7 +12,7 @@ module KaModUsers
         end
     end
 
-    @@facebook_config = YAML::load_file("#{self.root}/config/facebook.yml")
+    @@config = nil
 
     initializer :set_secret_key_base do |app|
         app.config.secret_key_base = "diE7UCDvDftoAnc0bqgr"
@@ -22,8 +22,21 @@ module KaModUsers
         File.join(File.dirname(__FILE__), '../../')
     end
 
+    def self.load_config
+        config_file_path = "#{KaApi.root}/config/ka_mod_users.yml"
+        if File.exists?(config_file_path)
+            @@config = YAML::load_file(config_file_path)
+        end
+    end
+
+    def self.config
+        self.load_config if @@config.nil?
+        @@config
+    end
+
     def self.facebook_config
-    	@@facebook_config
+        self.load_config if @@config.nil?
+    	@@config['facebook']
     end
   end
 end
