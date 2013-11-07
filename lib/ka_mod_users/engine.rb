@@ -38,5 +38,15 @@ module KaModUsers
         self.load_config if @@config.nil?
     	@@config['facebook']
     end
+
+    def self.http_proxy
+        self.load_config if @@config.nil?
+        @@config['http_proxy']
+    end
+
+    def self.user_extension_api_endpoint
+        self.load_config if @@config.nil?
+        @@config['user_extension_api_endpoint']
+    end
   end
 end

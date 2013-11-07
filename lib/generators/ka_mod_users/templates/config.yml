@@ -1,0 +1,7 @@
+facebook:
+  app_id: 'your_app_id'
+  app_secret: 'your_app_secret'
+
+user_extension_api_endpoint: 'http://api.hostname.com:8080/extusers/'
+
+# http_proxy: 'http://your_http_proxy:3128'
