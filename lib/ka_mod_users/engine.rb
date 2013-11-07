@@ -24,7 +24,6 @@ module KaModUsers
 
     def self.load_config
         config_file_path = "#{KaApi.root}/config/ka_mod_users.yml"
-        logger.debug(KaApi.root.inspect)
         if File.exists?(config_file_path)
             @@config = YAML::load_file(config_file_path)
         end
