@@ -3,7 +3,7 @@
 This is the users module for the public API. Its data source is provided by ka_ext_users to which it communicates via REST.
 
 It adds the following routes:  
-Users
+**Users**
 
 | Method        | Path                  | Action                           |
 |:--------------|:----------------------|:---------------------------------|
@@ -11,17 +11,20 @@ Users
 | PATCH         |/mount-base/users/:id  | edits the current loggedin user 
 | PUT           |/mount-base/users/:id  | edits the current loggedin user 
 
-Session
+**Session**
 
 | Method        | Path                  | Action                           |
 |:--------------|:----------------------|:---------------------------------|
 | POST          | /mount-base/sessions  | creates a session providing an access token
 | DELETE        | /mount-base/sessions/:id  | deletes the session for the given id or token
 
+
+
+-----
   
-This module adds some administration routes as well:  
+This module adds some **administration** routes as well:  
   
-Users
+**Users**
 
 | Method        | Path                  | Action                           |
 |:--------------|:----------------------|:---------------------------------|
