@@ -2,7 +2,21 @@
 
 This is the users module for the public API. Its data source is provided by ka_ext_users to which it communicates via REST.
 
-It adds the following routes:  
+#### Config file
+```yml
+facebook:
+  app_id: 'your_app_id'
+  app_secret: 'your_app_secret'
+
+user_extension_api_endpoint: 'http://api.hostname.com:8080/extusers/'
+
+# http_proxy: 'http://your_http_proxy:3128'
+```
+- *facebook:* - Facebook application settings for authentication
+- *user_extension_api_endpoint:* - the location where the user extension API can be reached
+- *http_proxy* - used for external HTTP requests (like the Facebook API). Set if needed.
+
+#### Routes
 **Users**
 
 | Method        | Path                  | Action                           |
