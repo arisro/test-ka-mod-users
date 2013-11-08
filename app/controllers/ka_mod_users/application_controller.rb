@@ -7,6 +7,7 @@ module KaModUsers
   		authenticate_or_request_with_http_token do |token, options|
   			token = ActiveSupport::JSON.decode(Token.resource[token].get) rescue nil
     		@current_user = token['user'] if token
+        @current_user['token'] = token['token'] if token
 
     		if @current_user.nil?
     			head :unauthorized
