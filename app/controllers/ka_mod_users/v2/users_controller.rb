@@ -1,5 +1,5 @@
 module KaModUsers
-  module V1
+  module V2
     class UsersController < KaModUsers::ApplicationController
       before_filter :authenticate, :only => [ :index, :update]
 
@@ -22,7 +22,7 @@ module KaModUsers
           fb_client = Facebook::Client.new
           url = fb_client.authorize_url(:callback => params[:callback])
 
-          render json: {:url => url}
+          render json: {:login_url => url}
         end
       end
     end

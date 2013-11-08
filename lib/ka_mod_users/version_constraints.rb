@@ -1,6 +1,6 @@
 module KaModUsers
 	class VersionConstraints
-		def initializer(options)
+		def initialize(options)
 			@version = options[:version]
 			@default = options[:default]
 		end
