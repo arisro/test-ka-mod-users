@@ -30,9 +30,15 @@ user_extension_api_endpoint: 'http://api.hostname.com:8080/extusers/'
 | Method        | Path                  | Action                           |
 |:--------------|:----------------------|:---------------------------------|
 | POST          | /mount-base/sessions  | creates a session providing an access token
-| DELETE        | /mount-base/sessions/:id  | deletes the session for the given id or token
+| DELETE        | /mount-base/sessions  | deletes the session for the current loggedin user
 
+**Others**
 
+| Method        | Path                  | Action                           |
+|:--------------|:----------------------|:---------------------------------|
+| GET | /mount-base/login_url | retrieves the URL to be placed on the Login button
+| POST | /mount-base/login | alias for POST /mount-base/sessions
+| GET | /mount-base/logout | alias for DELETE /mount-base/sessions
 
 -----
   
